@@ -1,0 +1,7 @@
+---
+- hosts: apservers
+  sudo: true
+  user: vagrant
+  roles:
+    - common
+    - webtier

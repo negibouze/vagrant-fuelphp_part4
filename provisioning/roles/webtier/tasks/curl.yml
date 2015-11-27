@@ -1,0 +1,6 @@
+---
+- name: install latest version curl
+  yum: pkg={{item}} state=present
+  with_items:
+    - http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-1-13.rhel6.noarch.rpm
+    - libcurl

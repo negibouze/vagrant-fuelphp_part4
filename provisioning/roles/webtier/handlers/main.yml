@@ -1,0 +1,9 @@
+---
+- name: copy httpd.conf
+  copy: src=../files/httpd.conf dest=/etc/httpd/conf/httpd.conf
+- name: enable httpd launch settings
+  command: /sbin/chkconfig httpd on
+- name: copy php.ini
+  copy: src=../files/php.ini dest=/etc/php.ini
+- name: restart httpd
+  service: name=httpd state=restarted

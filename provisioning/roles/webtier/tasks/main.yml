@@ -1,0 +1,6 @@
+---
+- include: httpd.yml
+# - include: git.yml
+- include: php.yml
+# - include: curl.yml
+- include: fuelphp.yml

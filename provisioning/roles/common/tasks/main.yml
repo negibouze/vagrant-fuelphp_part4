@@ -1,0 +1,9 @@
+---
+- name: change timezone
+  command: cp -p /usr/share/zoneinfo/Japan /etc/localtime
+- name: remove all rules from iptables
+  command: /sbin/iptables -F
+- name: iptables stop
+  command: /sbin/service iptables stop
+- name: iptables off
+  command: /sbin/chkconfig iptables off

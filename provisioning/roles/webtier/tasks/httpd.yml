@@ -1,0 +1,7 @@
+---
+# install httpd
+- name: install httpd
+  yum: name=httpd state=present
+  notify:
+    - copy httpd.conf
+    - enable httpd launch settings

@@ -1,0 +1,11 @@
+---
+# install FuelPHP
+- name: create target directory
+  command: mkdir -p /srv/example
+- name: install oil
+  shell: get.fuelphp.com/oil | sh
+- name: refine install
+  command: php oil refine install
+  args:
+    chdir: /srv/example/fuelphp
+  notify: restart httpd

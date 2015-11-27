@@ -1,0 +1,28 @@
+---
+# install latest version git
+- name: install dependency packages
+  yum: pkg={{item}} state=present
+  with_items:
+    - curl-devel
+    - expat-devel
+    - gettext-devel
+    - openssl-devel
+    - zlib-devel
+    - perl-ExtUtils-MakeMaker
+- stat: path=/usr/local/src/git
+  register: git_repo
+- name: temporary install old version git
+  yum: name=git state=present
+  when: not git_repo.stat.exists
+- name: clone(or pull) latest version git
+  git: repo=https://git.kernel.org/pub/scm/git/git.git dest=/usr/local/src/git
+- name: remove old git
+  yum: name=git state=absent
+  when: not git_repo.stat.exists
+- name: compile git
+  shell: "{{ item }}"
+  args:
+    chdir: /usr/local/src/git
+  with_items:
+    - make prefix=/usr/local all
+    - make prefix=/usr/local install

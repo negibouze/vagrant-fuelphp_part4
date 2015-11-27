@@ -1,0 +1,13 @@
+---
+# install php5.6
+- name: install epel
+  yum: name=http://ftp.iij.ad.jp/pub/linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+- name: install remi
+  yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
+- name: install php & packages (& dependencies)
+  yum: pkg={{item}} state=present enablerepo=remi,remi-php56
+  with_items:
+    - php
+    - php-common
+    - php-cli
+  notify: copy php.ini
